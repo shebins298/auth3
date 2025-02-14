@@ -1,5 +1,17 @@
 document.getElementById("google-login").addEventListener("click", () => {
+    const loadingMessage = document.getElementById("loading-message");
+    loadingMessage.style.display = "block"; // Show "Authenticating..." message
+
     const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).then((result) => {
+        console.log("✅ Login Successful", result.user);
+        window.location.href = "control-panel.html"; // Redirect to control panel
+    }).catch((error) => {
+        console.error("❌ Login Error:", error);
+        loadingMessage.style.display = "none"; // Hide message if login fails
+    });
+});
+
 
     auth.signInWithPopup(provider)
         .then(result => {
