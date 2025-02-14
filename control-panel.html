@@ -7,23 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to the Control Panel</h1>
-    <div id="loading-spinner" class="spinner"></div>
+    <div class="container">
+        <h1>Control Panel</h1>
+        <div id="loading-spinner" class="spinner"></div>
 
+        <div class="button-group">
+            <button id="user-panel-btn" style="display: none;" onclick="window.location.href='user-panel.html'">
+                User Panel
+            </button>
+            <button id="admin-panel-btn" style="display: none;" onclick="window.location.href='admin-panel.html'">
+                Admin Panel
+            </button>
+        </div>
+        
+        <button id="logout" class="logout-btn">Logout</button>
+    </div>
 
-    <button id="user-panel-btn" style="display: none;" onclick="window.location.href='user-panel.html'">User Panel</button>
-    <button id="admin-panel-btn" style="display: none;" onclick="window.location.href='admin-panel.html'">Admin Panel</button>
-    <button id="logout">Logout</button>
-
-    <!-- ✅ Firebase SDK Scripts (MUST come before firebase-config.js) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-    <!-- ✅ Firebase Configuration (AFTER SDKs are loaded) -->
+    <!-- Firebase Config -->
     <script src="firebase-config.js"></script>
 
-    <!-- ✅ Control Panel Logic (LAST) -->
+    <!-- Control Panel Logic -->
     <script src="control-panel.js"></script>
 </body>
 </html>
