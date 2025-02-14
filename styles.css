@@ -1,74 +1,104 @@
-/* General Styles */
+/* ✅ Apple-Inspired Clean Design */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f5f5f7; /* Light Apple-like background */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
-/* Container */
-.container {
+/* ✅ Login Container */
+.login-container {
     background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 90%;
-    max-width: 400px;
+    width: 350px;
 }
 
-/* Heading */
-h1 {
-    font-size: 24px;
+/* ✅ Title */
+h2 {
+    color: #1d1d1f;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
-/* Buttons */
+/* ✅ Google Login Button */
 button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
+    background: #0071e3; /* Apple blue */
+    color: white;
     border: none;
+    padding: 12px 20px;
     border-radius: 8px;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
 button:hover {
-    opacity: 0.8;
+    background: #005bb5; /* Darker blue */
 }
 
-/* User Panel Button */
-#user-panel-btn {
-    background-color: #007bff;
-    color: white;
+/* ✅ Control Panel */
+.control-panel {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
 }
 
-/* Admin Panel Button */
-#admin-panel-btn {
-    background-color: #28a745;
-    color: white;
+.control-panel h2 {
+    color: #1d1d1f;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-/* Logout Button */
-.logout-btn {
-    background-color: #dc3545;
-    color: white;
+.panel-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Loading Spinner */
+.panel-buttons button {
+    flex: 1;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 600px) {
+    .login-container, .control-panel {
+        width: 90%;
+        padding: 30px;
+    }
+}
+
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
 .spinner {
-    display: none;
-    width: 40px;
-    height: 40px;
-    margin: 10px auto;
-    border: 4px solid #ddd;
-    border-top: 4px solid #007bff;
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top: 5px solid #007bff;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
