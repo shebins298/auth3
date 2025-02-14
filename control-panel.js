@@ -1,31 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ✅ Ensure Firebase is available
-    if (typeof firebase === "undefined") {
-        console.error("❌ Firebase not found in control-panel.js!");
+    if (!firebase) {
+        console.error("❌ Firebase SDK not loaded!");
         return;
     }
 
-    console.log("✅ Firebase SDK confirmed in control-panel.js");
+    const body = document.body;
 
-    // ✅ Ensure auth and db are available
-    if (!window.auth || !window.db) {
-        console.error("❌ Firebase services (auth, db) not initialized!");
-        return;
-    }
+    // Show spinner while loading
+    body.innerHTML = `
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <h2>Loading...</h2>
+        </div>
+    `;
 
     auth.onAuthStateChanged(user => {
         if (user) {
             const uid = user.uid;
-            
             db.collection("users").doc(uid).get().then(doc => {
                 if (doc.exists) {
                     const role = doc.data().role;
 
+                    // Replace UI with the actual control panel
+                    body.innerHTML = `
+                        <h1>Welcome to the Control Panel</h1>
+                        <button id="user-panel-btn" style="display: none;">User Panel</button>
+                        <button id="admin-panel-btn" style="display: none;">Admin Panel</button>
+                        <button id="logout">Logout</button>
+                    `;
+
+                    // Get new button elements after replacing innerHTML
                     const userPanelBtn = document.getElementById("user-panel-btn");
                     const adminPanelBtn = document.getElementById("admin-panel-btn");
+                    const logoutBtn = document.getElementById("logout");
 
-                    if (userPanelBtn) userPanelBtn.style.display = "block";
-                    if (adminPanelBtn && role === "admin") adminPanelBtn.style.display = "block";
+                    userPanelBtn.style.display = "block";
+                    if (role === "admin") {
+                        adminPanelBtn.style.display = "block";
+                    }
+
+                    // Logout event
+                    logoutBtn.addEventListener("click", () => {
+                        auth.signOut().then(() => {
+                            window.location.href = "index.html";
+                        });
+                    });
+
                 } else {
                     alert("Unauthorized Access!");
                     auth.signOut();
@@ -38,16 +58,4 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "index.html";
         }
     });
-
-    // ✅ Logout
-    const logoutBtn = document.getElementById("logout");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            auth.signOut().then(() => {
-                window.location.href = "index.html";
-            });
-        });
-    } else {
-        console.error("❌ Logout button not found!");
-    }
 });
